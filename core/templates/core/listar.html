@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block conteudo %}
+
+<body class="bg-dark text-light">
+
+    <div class="container mt-5">
+
+        <h1 class="mb-4">📋 HelpDesk - Chamados</h1>
+
+        <div class="row g-4">
+            {% for chamado in chamados %}
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            🖥️ Lab {{ chamado.lab }}
+                        </h5>
+
+                        <p class="card-text">
+                            <strong>Problema:</strong><br>
+                            {{ chamado.problema }}
+                        </p>
+
+                        <p>
+                            <strong>Prioridade:</strong>
+                            {% if chamado.prioridade == "Alta" %}
+                            <span class="badge bg-danger">{{ chamado.prioridade }}</span>
+                            {% elif chamado.prioridade == "Média" %}
+                            <span class="badge bg-warning text-dark">{{ chamado.prioridade }}</span>
+                            {% else %}
+                            <span class="badge bg-secondary">{{ chamado.prioridade }}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-0 text-end">
+                        <a href='fechar/' class="btn btn-sm btn-outline-danger">
+                            Fechar Chamado
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">Nenhum chamado encontrado.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</body>
+{% endblock %}
+
+</html>

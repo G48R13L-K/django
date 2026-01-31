@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+
+{% block conteudo %}
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <h2 class="text-secondary mb-4">Status do Sistema</h2>
+
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <div>
+                            <strong>Sucesso!</strong> O servidor está rodando e os templates estão conectados.
+                        </div>
+                    </div>
+
+                    <p class="text-muted">
+                        Este é um exemplo de como o <strong>MVT</strong> separa as coisas.
+                        O Python apenas enviou os dados, enquanto o HTML e CSS cuidam de toda a beleza que você está
+                        vendo.
+                    </p>
+
+                    <hr>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/" class="btn btn-primary btn-lg px-4">Atualizar Página</a>
+                        <a href="/listar" class="btn btn-outline-secondary btn-lg px-4">Lista de chamados</a>
+                        <a href="/novo-chamado" class="btn btn-outline-secondary btn-lg px-4">Novo chamado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+</body>
+
+</html>
+
+{% endblock %}
