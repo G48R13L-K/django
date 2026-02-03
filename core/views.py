@@ -1,15 +1,17 @@
 import html
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
+
 
 
 def home(request):
     return render(request, "core/home.html", {"html": html})
 
 chamados = [
-    {"lab": "lab01", "problema": "Computador não liga", "prioridade": "Alta"},
-    {"lab": "lab02", "problema": "Internet lenta", "prioridade": "Média"},
-    {"lab": "lab03", "problema": "Impressora sem papel", "prioridade": "Baixa"},
+    {"id": 1, "lab": "lab01", "categoria": "Hardware", "problema": "Computador não liga", "prioridade": "Alta"},
+    {"id": 2, "lab": "lab02", "categoria": "Software", "problema": "Internet lenta", "prioridade": "Média"},
+    {"id": 3, "lab": "lab03", "categoria": "Hardware", "problema": "Impressora sem papel", "prioridade": "Baixa"},
 ]
 
 def listar(request):
@@ -17,10 +19,11 @@ def listar(request):
 
 
 
-def fechar_chamado( index):
-    if 0 <= index < len(chamados):
-        del chamados[index]
-    return redirect('/listar')
+def fechar_chamado(request, id):
+    chamado = chamados[id - 1]  # Assuming chamados is a list of dictionaries
+    chamados.remove(chamado)
+    print(f"Fechando chamado {chamado['id']} - {chamado['problema']}")
+    return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/listar'>Voltar</a>")
     
 def novoChamado(request): 
    
@@ -28,12 +31,15 @@ def novoChamado(request):
 
         laboratorio = request.POST.get('laboratorio')
         prolema = request.POST.get('problema')
+        categoria = request.POST.get('categoria')
         prioridade = request.POST.get('prioridade')
         
         print(f"Recebido: {laboratorio}, {prolema}, {prioridade}") 
 
         chamados.append({
+            "id": len(chamados) + 1,
             "lab": laboratorio,
+            "categoria": categoria,
             "problema": prolema,
             "prioridade": prioridade
         })
@@ -41,4 +47,26 @@ def novoChamado(request):
         
         return redirect('/listar')
 
-    return render(request, 'core/novo_chamado.html')
+    return render(request, 'core/novo_chamado.html', {"categorias_list": categorias_list})
+
+def categorias(request):
+    return render(request, "core/categorias.html", {"categorias": categorias_list})
+
+categorias_list = [
+    {"id": 1, "nome": "Hardware", "descricao": "Problemas relacionados a componentes físicos"},
+    {"id": 2, "nome": "Software", "descricao": "Problemas relacionados a programas e aplicativos"}
+]
+def novaCategoria(request):
+    if request.method == "POST":
+        id = len(categorias_list) + 1
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
+        categorias_list.append({
+            "id": id,
+            "nome": nome,
+            "descricao": descricao
+        })
+        print(f"Nova categoria criada: {nome}, {descricao}")
+        return HttpResponse(f"✅ Categoria '{nome}' criada com sucesso! <br> <a href='/categorias'>Voltar</a>")   
+    
+    return render(request, 'core/nova_categoria.html')

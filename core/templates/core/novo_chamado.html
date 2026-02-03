@@ -24,6 +24,16 @@
                 </div>
 
                 <div class="mb-3">
+                    <label class="form-label fw-bold">Categoria:</label>
+                    <select name="categoria" class="form-select" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        {% for categorias in categorias_list %}
+                        <option value="{{ categorias.nome }}">{{ categorias.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label fw-bold">Prioridade:</label>
                     <select name="prioridade" class="form-select">
                         <option value="Baixa">Baixa</option>

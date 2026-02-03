@@ -22,6 +22,10 @@
                             <strong>Problema:</strong><br>
                             {{ chamado.problema }}
                         </p>
+                        <p>
+                            <strong>Categoria:</strong>
+                            {{ chamado.categoria }}
+                        </p>
 
                         <p>
                             <strong>Prioridade:</strong>
@@ -35,11 +39,12 @@
                         </p>
                     </div>
 
-                    <div class="card-footer bg-transparent border-0 text-end">
-                        <a href='fechar/' class="btn btn-sm btn-outline-danger">
-                            Fechar Chamado
+                    <td>
+                        <a href="{% url 'fechar-chamado' chamado.id %}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Tem certeza que deseja fechar o chamado?')">
+                            Fechar chamado
                         </a>
-                    </div>
+                    </td>
 
                 </div>
             </div>

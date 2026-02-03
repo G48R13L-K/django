@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block conteudo %}
+
+<body class="bg-dark text-light">
+
+    <div class="container mt-5">
+
+        <h1 class="mb-4">📋 HelpDesk - Categorias</h1>
+
+        <div class="row g-4">
+            {% for categoria in categorias %}
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            🖥️ {{ categoria.nome }}
+                        </h5>
+                        <p class="card-text">
+                            {{ categoria.descricao }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">Nenhuma categoria encontrada.</p>
+            {% endfor %}
+            <!-- criar nova categoria -->
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 d-flex align-items-center justify-content-center">
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">➕ Criar Nova Categoria</h5>
+                        <a href="/nova-categoria" class="btn btn-primary">Nova Categoria</a>
+                    </div>
+                </div>
+</body>
+
+
+{% endblock %}
