@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 
+from core.models import Chamado
+
 
 
 def home(request):
@@ -14,8 +16,8 @@ chamados = [
     {"id": 3, "lab": "lab03", "categoria": "Hardware", "problema": "Impressora sem papel", "prioridade": "Baixa"},
 ]
 
-def listar(request):
-    return render(request, "core/listar.html", {"chamados": chamados})
+def listarChamados(request):
+    return render(request, "core/lista_chamados.html", {"chamados": chamados})
 
 
 
@@ -23,7 +25,7 @@ def fechar_chamado(request, id):
     chamado = chamados[id - 1]  # Assuming chamados is a list of dictionaries
     chamados.remove(chamado)
     print(f"Fechando chamado {chamado['id']} - {chamado['problema']}")
-    return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/listar'>Voltar</a>")
+    return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/lista-chamados/'>Voltar</a>")
     
 def novoChamado(request): 
    
@@ -45,12 +47,12 @@ def novoChamado(request):
         })
 
         
-        return redirect('/listar')
+        return redirect('/lista_chamados/')
 
     return render(request, 'core/novo_chamado.html', {"categorias_list": categorias_list})
 
-def categorias(request):
-    return render(request, "core/categorias.html", {"categorias": categorias_list})
+def listarCategorias(request):
+    return render(request, "core/lista-categorias.html", {"categorias": categorias_list})
 
 categorias_list = [
     {"id": 1, "nome": "Hardware", "descricao": "Problemas relacionados a componentes físicos"},
@@ -67,6 +69,12 @@ def novaCategoria(request):
             "descricao": descricao
         })
         print(f"Nova categoria criada: {nome}, {descricao}")
-        return HttpResponse(f"✅ Categoria '{nome}' criada com sucesso! <br> <a href='/categorias'>Voltar</a>")   
+        return HttpResponse(f"✅ Categoria '{nome}' criada com sucesso! <br> <a href='/lista-categorias/'>Voltar</a>")   
     
     return render(request, 'core/nova_categoria.html')
+
+def fechar_categoria(request, id):
+    categoria = categorias_list[id - 1]  # Assuming categorias_list is a list of dictionaries
+    categorias_list.remove(categoria)
+    print(f"Fechando categoria {categoria['id']} - {categoria['nome']}")
+    return HttpResponse(f"✅ Categoria removida com sucesso! <br> <a href='/lista-categorias/'>Voltar</a>")

@@ -16,15 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path 
-from core.views import home, listar, fechar_chamado, novaCategoria, novoChamado, categorias
+from core.views import fechar_categoria, home, listarChamados, fechar_chamado, novaCategoria, novoChamado, listarCategorias
 
 
 urlpatterns = [
 path('admin/', admin.site.urls), 
 path('', home),
-path('listar/', listar),
+path('lista_chamados/', listarChamados),
 path('novo-chamado/', novoChamado),
 path('fechar-chamado/<int:id>', fechar_chamado, name='fechar-chamado'),
-path('categorias/', categorias),
+path('lista-categorias/', listarCategorias),
 path('nova-categoria/', novaCategoria),
+path('fechar-categoria/<int:id>', fechar_categoria, name='fechar-categoria'),
 ]

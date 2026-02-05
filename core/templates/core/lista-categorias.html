@@ -20,21 +20,19 @@
                         <p class="card-text">
                             {{ categoria.descricao }}
                         </p>
+                        <a href="{% url 'fechar-categoria' categoria.id %}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Tem certeza que deseja fechar a categoria?')">
+                            Excluir categoria
+                        </a>
+
+                        </p>
                     </div>
                 </div>
             </div>
             {% empty %}
             <p class="text-muted">Nenhuma categoria encontrada.</p>
             {% endfor %}
-            <!-- criar nova categoria -->
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 d-flex align-items-center justify-content-center">
 
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-primary">➕ Criar Nova Categoria</h5>
-                        <a href="/nova-categoria" class="btn btn-primary">Nova Categoria</a>
-                    </div>
-                </div>
 </body>
 
 
