@@ -23,9 +23,9 @@ urlpatterns = [
 path('admin/', admin.site.urls), 
 path('', home),
 path('lista_chamados/', listarChamados),
-path('novo-chamado/', novoChamado),
+path('novo_chamado/', novoChamado),
 path('fechar-chamado/<int:id>', fechar_chamado, name='fechar-chamado'),
 path('lista-categorias/', listarCategorias),
-path('nova-categoria/', novaCategoria),
+path('nova_categoria/', novaCategoria),
 path('fechar-categoria/<int:id>', fechar_categoria, name='fechar-categoria'),
 ]
