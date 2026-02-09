@@ -68,3 +68,14 @@ def novaCategoria(request):
 def excluir_categoria(request, id):
     Categoria.objects.get(id=id).delete()
     return redirect('/lista-categorias')
+
+def editar_chamado(request, id):
+    chamado =Chamado.objects.get(id=id)
+    if request.method == "POST":
+        chamado.laboratorio = request.POST.get('laboratorio')
+        chamado.problema = request.POST.get('problema')
+        chamado.prioridade = request.POST.get('prioridade')
+        chamado.categoria = request.POST.get('categoria')
+        chamado.save()
+        return redirect('/lista_chamados')
+    return render(request, 'core/editar_chamado.html', {"chamado": chamado, "categorias": Categoria.objects.all()}) 

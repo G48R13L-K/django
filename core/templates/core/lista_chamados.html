@@ -44,6 +44,12 @@
                     </div>
 
                     <td>
+                        <a href="{% url 'editar_chamado' chamado.id %}" class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+                    </td>
+
+                    <td>
                         <a href="{% url 'fechar-chamado' chamado.id %}" class="btn btn-danger btn-sm"
                             onclick="return confirm('Tem certeza que deseja fechar o chamado?')">
                             Fechar chamado

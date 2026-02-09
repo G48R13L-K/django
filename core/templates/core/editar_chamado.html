@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+
+{% block conteudo %}
+
+<body>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Editar Chamado</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Laboratório:</label>
+                    <input type="text" name="laboratorio" class="form-control" value="{{ chamado.laboratorio }}"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Descrição:</label>
+                    <input type="text" name="problema" class="form-control" value="{{ chamado.problema }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Prioridade:</label>
+                    <select name="prioridade" class="form-select" required>
+                        <option value="Baixa" {% if chamado.prioridade=="Baixa" %}selected{% endif %}>Baixa</option>
+                        <option value="Média" {% if chamado.prioridade=="Média" %}selected{% endif %}>Média</option>
+                        <option value="Alta" {% if chamado.prioridade=="Alta" %}selected{% endif %}>Alta</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Categoria:</label>
+                    <select name="categoria" class="form-select" required>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}" {% if chamado.categoria.id==categoria.id %}selected{% endif
+                            %}>
+                            {{ categoria.nome }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success btn-lg">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

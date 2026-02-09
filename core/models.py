@@ -1,26 +1,5 @@
 from django.db import models
  
-class Chamado(models.Model):
-    # Texto curto (max 100 letras)
-    laboratorio = models.CharField(max_length=100)
-    
-    # Texto longo (sem limite de letras)
-    problema = models.TextField()
-    
-    # Escolhas pré-definidas
-    OPCOES_PRIORIDADE = [
-        ('Baixa', 'Baixa'),
-        ('Média', 'Média'),
-        ('Alta', 'Alta'),
-    ]
-    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='Média')
-    categoria = models.CharField(max_length=20, default='Geral')
-    
-    # Data e Hora automática no momento da criação
-    data_criacao = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.laboratorio} - {self.prioridade} - {self.categoria} - {self.data_criacao} "
 
              
 class Categoria(models.Model):
@@ -81,3 +60,29 @@ class Pessoa(models.Model):
 
         def __str__(self):
             return f"{self.nome} - {self.email} - {self.cpf} - {self.data_criacao} - {self.idade} - {self.cidade} - {self.estado} - {self.pais} - {self.genero} - {self.estado_civil} - {self.altura} - {self.peso} - {self.emprego}"
+
+class Chamado(models.Model):
+    Categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    Pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
+    Equipamento = models.ForeignKey(Equipamento, on_delete=models.SET_NULL, null=True) 
+
+    # Texto curto (max 100 letras)
+    laboratorio = models.CharField(max_length=100)
+    
+    # Texto longo (sem limite de letras)
+    problema = models.TextField()
+    
+    # Escolhas pré-definidas
+    OPCOES_PRIORIDADE = [
+        ('Baixa', 'Baixa'),
+        ('Média', 'Média'),
+        ('Alta', 'Alta'),
+    ]
+    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='Média')
+    categoria = models.CharField(max_length=20, default='Geral')
+    
+    # Data e Hora automática no momento da criação
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.laboratorio} - {self.prioridade} - {self.categoria} - {self.data_criacao} "
