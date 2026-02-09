@@ -62,9 +62,9 @@ class Pessoa(models.Model):
             return f"{self.nome} - {self.email} - {self.cpf} - {self.data_criacao} - {self.idade} - {self.cidade} - {self.estado} - {self.pais} - {self.genero} - {self.estado_civil} - {self.altura} - {self.peso} - {self.emprego}"
 
 class Chamado(models.Model):
-    Categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
-    Pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
-    Equipamento = models.ForeignKey(Equipamento, on_delete=models.SET_NULL, null=True) 
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.SET_NULL, null=True) 
 
     # Texto curto (max 100 letras)
     laboratorio = models.CharField(max_length=100)
@@ -74,12 +74,12 @@ class Chamado(models.Model):
     
     # Escolhas pré-definidas
     OPCOES_PRIORIDADE = [
-        ('Baixa', 'Baixa'),
-        ('Média', 'Média'),
-        ('Alta', 'Alta'),
+        ('baixa', 'Baixa'),
+        ('media', 'Média'),
+        ('alta', 'Alta'),
     ]
-    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='Média')
-    categoria = models.CharField(max_length=20, default='Geral')
+    prioridade = models.CharField(max_length=10, choices=OPCOES_PRIORIDADE, default='media')
+    
     
     # Data e Hora automática no momento da criação
     data_criacao = models.DateTimeField(auto_now_add=True)

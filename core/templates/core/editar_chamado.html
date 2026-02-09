@@ -25,10 +25,13 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Prioridade:</label>
+
                     <select name="prioridade" class="form-select" required>
-                        <option value="Baixa" {% if chamado.prioridade=="Baixa" %}selected{% endif %}>Baixa</option>
-                        <option value="Média" {% if chamado.prioridade=="Média" %}selected{% endif %}>Média</option>
-                        <option value="Alta" {% if chamado.prioridade=="Alta" %}selected{% endif %}>Alta</option>
+                        <option value= "baixa" {% if chamado.prioridade == "baixa" %}selected{% endif %}>Baixa</option>
+                        <option value= "media" {% if chamado.prioridade == "media" %}selected{% endif %}>Média</option>
+                        <option value= "alta" {% if chamado.prioridade == "alta" %}selected{% endif %}>Alta</option>
+                    </select>
+
                     </select>
                 </div>
 
@@ -36,8 +39,7 @@
                     <label class="form-label fw-bold">Categoria:</label>
                     <select name="categoria" class="form-select" required>
                         {% for categoria in categorias %}
-                        <option value="{{ categoria.id }}" {% if chamado.categoria.id==categoria.id %}selected{% endif
-                            %}>
+                        <option value="{{ categoria.id }}" {% if chamado.categoria.id == categoria.id %}selected{% endif %}>
                             {{ categoria.nome }}
                         </option>
                         {% endfor %}

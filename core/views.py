@@ -30,7 +30,7 @@ def novoChamado(request):
         laboratorio = request.POST.get('laboratorio')
         problema = request.POST.get('problema')
         prioridade = request.POST.get('prioridade')
-        categoria = request.POST.get('categoria')
+        categoria = Categoria.objects.get(id=request.POST.get('categoria'))
 
         print("chegou um post")
         print(f"Laboratório: {laboratorio}, Descrição: {problema}")
@@ -45,7 +45,7 @@ def novoChamado(request):
         return render(request, 'core/novo_chamado.html', {"categorias": Categoria.objects.all()})
 
 
-
+@login_required
 def fechar_categoria(request, id):
     categoria = Categoria.objects.get(id=id)
     categoria.delete()
@@ -56,6 +56,7 @@ def listarCategorias(request):
     categorias = Categoria.objects.all() 
     return render(request, 'core/lista-categorias.html', {"categorias": categorias})
 
+@login_required
 def novaCategoria(request):
     if request.method == "POST":
         nome = request.POST.get('nome')
@@ -65,6 +66,7 @@ def novaCategoria(request):
         return redirect('/lista-categorias')
     return render(request, 'core/nova_categoria.html')
 
+@login_required
 def excluir_categoria(request, id):
     Categoria.objects.get(id=id).delete()
     return redirect('/lista-categorias')
@@ -75,7 +77,7 @@ def editar_chamado(request, id):
         chamado.laboratorio = request.POST.get('laboratorio')
         chamado.problema = request.POST.get('problema')
         chamado.prioridade = request.POST.get('prioridade')
-        chamado.categoria = request.POST.get('categoria')
+        chamado.categoria = Categoria.objects.get(id=request.POST.get('categoria'))
         chamado.save()
         return redirect('/lista_chamados')
     return render(request, 'core/editar_chamado.html', {"chamado": chamado, "categorias": Categoria.objects.all()}) 
