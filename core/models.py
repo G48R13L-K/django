@@ -66,6 +66,7 @@ class Chamado(models.Model):
     pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.SET_NULL, null=True) 
 
+
     # Texto curto (max 100 letras)
     laboratorio = models.CharField(max_length=100)
     

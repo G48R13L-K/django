@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path 
-from core.views import fechar_categoria, home, listarChamados, fechar_chamado, novaCategoria, novoChamado, listarCategorias, editar_chamado
-
+from core.views import fechar_categoria, home, listarChamados, fechar_chamado, novaCategoria, novoChamado
+from core.views import editar_chamado, editar_categoria, api_chamados
+from core.views import ListarCategoriaView
 
 urlpatterns = [
 path('admin/', admin.site.urls), 
@@ -25,8 +26,10 @@ path('', home),
 path('lista_chamados/', listarChamados),
 path('novo_chamado/', novoChamado),
 path('fechar-chamado/<int:id>', fechar_chamado, name='fechar-chamado'),
-path('lista-categorias/', listarCategorias),
+path('lista-categorias/', ListarCategoriaView.as_view(), name='listar-categorias'),
 path('nova_categoria/', novaCategoria),
 path('fechar-categoria/<int:id>', fechar_categoria, name='fechar-categoria'),
 path('editar_chamado/<int:id>', editar_chamado, name='editar_chamado'),
+path('editar_categoria/<int:id>', editar_categoria, name='editar_categoria'),
+path('api/chamados/', api_chamados, name='listar-chamados-api')
 ]

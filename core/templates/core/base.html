@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,9 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelpDesk | Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}" >
+    
+
     <style>
         body {
             background-color: #f8f9fa;
+            
         }
 
         .hero-section {
@@ -20,7 +26,48 @@
 </head>
 
 <body>
+    <div>
+
+            {% if user.is_authenticated %}
+            <div class="my-3" style="display: flex;">
+                <span>
+                    Olá, <strong>{{ user.username }}</strong>
+                </span>
+                <form method="post" action="/admin/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        Logout
+                    </button>
+                </form>
+            </div>
+            
+
+            {% else %}
+            <div class="my-3" style="display: flex;">
+                <span>
+                    Você não está logado
+                </span>
+                <a href="/admin/login/?next=/home/" class="btn btn-primary">
+                    Login
+                
+                </a>
+                
+            </div>
+
+            {% endif %}
+        </div>
     <header class="hero-section text-center shadow-sm">
+        <div class="row g-0 min-vh-40hv">
+
+        
+        
+
+    <hr class="text-secondary">
+
+    
+    
+</div>
+
         <div class="container">
             <h1 class="display-3 fw-bold">Hello, Django! 🚀</h1>
             <p class="lead">Seu sistema de HelpDesk agora tem uma interface moderna.</p>
@@ -31,14 +78,27 @@
         <nav class="navbar navbar-dark bg-dark mb-4 shadow">
             <div class="container">
                 <a class="navbar-brand" href="/">
+                    <img src="{% static 'core/image/logo.png' %}" alt="Logo">
                     🛠
                     HelpDesk Senac</a>
             </div>
         </nav>
         <div class="container">
+        
+            <div class="container mt-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
             {% block conteudo %}
 
             {% endblock %}
+      
         </div>
         <footer class="text-center py-4 text-muted">
             <small>&copy; 2026 - Curso Técnico de Desenvolvimento Web</small>

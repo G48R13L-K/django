@@ -1,0 +1,50 @@
+/* Sidebar */
+.sidebar {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #111827, #1f2937);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+        width: 240px;
+        color: white;
+        padding: 30px 20px;
+}
+
+/* Logo */
+.sidebar img {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+
+/* Título */
+.sidebar h5 {
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Links */
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    margin: 8px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #d1d5db;
+    transition: all 0.3s ease;
+}
+
+/* Hover bonito */
+.sidebar a:hover {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Link ativo */
+.sidebar a.active {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    font-weight: 600;
+}
+
+
+
+
